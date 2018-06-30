@@ -28,12 +28,8 @@ public:
 	bool empty();
 	// push employee to the priority queue of book
 	void push(Employee* e);
-	// Pop the first employee of priority queue
-	void pop();
-	// sort the employee queue according the priority of waiting_time – retaining_time
-	void sort();
-	// update the retaining time and waiting time of employee in the queue
-	void update(int days);
+	// Pop the first employee of priority queue and update retaining time and waiting time of employee.
+	void pop(int days);
 	// Print the book 
 	void print();
 

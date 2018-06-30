@@ -5,6 +5,7 @@
 #include <string>
 using namespace std;
 
+// Constructor
 Book::Book(string book_name) :archived(true), title(book_name)
 {
 
@@ -67,40 +68,40 @@ void Book::push(Employee* employee)
 	employee_queue.push_back(employee);
 }
 
-// Pop the first employee of priority queue
-void Book::pop()
+// Pop the first employee of priority queue and update retaining time and waiting time of employee.
+void Book::pop(int days)
 {
-	employee_queue.pop_front();
-}
-
-// sort the employee queue according the priority of waiting_time – retaining_time
-void Book::sort()
-{
-	employee_queue.sort([](Employee * lhs, Employee * rhs)
-	{ return (lhs->get_waiting_time() - lhs->get_retaining_time()) > (rhs->get_waiting_time() - rhs->get_retaining_time()); });
-}
-
-// update the retaining time and waiting time of employee in the queue
-void Book::update(int days)
-{
-	list<Employee*> ::iterator iter;
+	// Find the emmployee with the highest priority in the queue
+	list<Employee*> ::iterator iter, to_be_popped;
+	to_be_popped = employee_queue.begin();
+	int max = (*to_be_popped)->calculate_priority();
 	for (iter = employee_queue.begin(); iter != employee_queue.end(); ++iter)
 	{
-		if (iter == employee_queue.begin())
+		if (((*iter)->calculate_priority()) > max)
 		{
-			(*iter)->updayte_retaining_time(days);
-		}
-		else
-		{
-			(*iter)->update_waiting_time(days);
+			max = (*iter)->calculate_priority();
+			to_be_popped = iter;
 		}
 	}
+	// update the retaining time for the employee with the highest priority
+	(*to_be_popped)->update_retaining_time(days);
+	// pop the emmployee with the highest priority
+	employee_queue.erase(to_be_popped);
+
+	if (employee_queue.empty())
+		return;
+	
+	// update the waiting time for the rest employee in the queue
+	for (iter = employee_queue.begin(); iter != employee_queue.end(); ++iter)
+	{
+		(*iter)->update_waiting_time(days);
+	}
 }
+
 
 // Print the book 
 void Book::print()
 {
-	sort();
 	cout << setiosflags(ios::left) << setw(12) << "Employee" << setw(20) << "Retaining Time" << setw(20) << "Waiting Time" << endl;
 	list<Employee*> ::iterator iter;
 	for (iter = employee_queue.begin(); iter != employee_queue.end(); ++iter)
