@@ -2,6 +2,7 @@
 #define EMPLOYEE_H
 #include <string>
 using namespace std;
+
 class Employee {
 
 public:
@@ -20,7 +21,9 @@ public:
 	// update waiting time
 	void update_waiting_time(int days);
 	// updayte retaining time
-	void updayte_retaining_time(int days);
+	void update_retaining_time(int days);
+	// calculate the priority: waiting_time – retaining_time.
+	int calculate_priority();
 
 private:
 	string name;

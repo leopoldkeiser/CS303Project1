@@ -53,7 +53,13 @@ void Employee::update_waiting_time(int days)
 }
 
 // updayte retaining time
-void Employee::updayte_retaining_time(int days)
+void Employee::update_retaining_time(int days)
 { 
 	retaining_time += days;
+}
+
+// calculate the priority: waiting_time – retaining_time.
+int Employee::calculate_priority()
+{
+	return waiting_time - retaining_time;
 }
