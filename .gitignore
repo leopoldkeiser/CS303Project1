@@ -5,3 +5,16 @@
 /.vs
 /CS303Project1/.vs/CS303Project1/v15
 /CS303Project1/CS303Project1/x64/Debug
+*.exe
+*.ilk
+*.ipch
+*.tlog
+*.obj
+*.idb
+*.pdb
+*.pdb
+*.ilk
+*.exe
+CS303Project1Local/.vs/CS303Project1Local/v15/.suo
+*.db
+*.log
